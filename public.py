@@ -24,7 +24,7 @@ def articles():
         datePosted.append(dates.format_datetime(post.date_posted, "EEEE, d MMMM y 'at' HH:mm"))
     return render_template('articles.html', posts=posts, date_posted=datePosted)
 
-@public.route('/article/<title>')
+@public.route('/article/<title>/')
 def article(title):
     article = Articles.query.filter_by(link=title).first_or_404()
     datePosted = dates.format_datetime(article.date_posted, "EEEE, d MMMM y 'at' HH:mm")

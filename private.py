@@ -30,9 +30,9 @@ def addPost():
     db.session.commit()
     return jsonify(articleSchema.dump(article))
 
-@private.route('/delete_post/<post_id>/', methods=['DELETE'])
+@private.route('/delete_post_id/<post_id>/', methods=['DELETE'])
 @jwt_required()
-def deletePost(post_id):
+def deletePostID(post_id):
     article = Articles.query.filter_by(id=post_id).first_or_404()
     if article:
         db.session.delete(article)
@@ -40,15 +40,41 @@ def deletePost(post_id):
         return jsonify('Article has been deleted successfully.')
     return jsonify('Article not found.')
 
-
-@private.route('/edit_post/<post_id>/', methods=['PUT'])
+@private.route('/delete_post_by_id/<title>/', methods=['DELETE'])
 @jwt_required()
-def editPost(post_id):
+def deletePost(title):
+    article = Articles.query.filter_by(link=title).first_or_404()
+    if article:
+        db.session.delete(article)
+        db.session.commit()
+        return jsonify('Article has been deleted successfully.')
+    return jsonify('Article not found.')
+
+@private.route('/edit_post_id/<post_id>/', methods=['PUT'])
+@jwt_required()
+def editPostID(post_id):
     requestedArticle = request.get_json()
     article = Articles.query.filter_by(id=post_id).first_or_404()
     if article:
         article.title = requestedArticle['title']
         article.content = requestedArticle['content']
+        article.summary = requestedArticle['summary']
+        article.date_updated = datetime.now()
+        article.tags = requestedArticle['tags']
+        article.categories = requestedArticle['categories']
+        db.session.commit()
+        return jsonify(articleSchema.dump(article))
+    return jsonify('Article not found.')
+
+@private.route('/edit_post/<title>/', methods=['PUT'])
+@jwt_required()
+def editPost(title):
+    requestedArticle = request.get_json()
+    article = Articles.query.filter_by(link=title).first_or_404()
+    if article:
+        article.title = requestedArticle['title']
+        article.content = requestedArticle['content']
+        article.summary = requestedArticle['summary']
         article.date_updated = datetime.now()
         article.tags = requestedArticle['tags']
         article.categories = requestedArticle['categories']
