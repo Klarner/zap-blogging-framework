@@ -1,0 +1,20 @@
+{% extends 'page-base.html' %}
+
+{% block content %}
+<div class="columns">
+    <div class="column">
+        <div class="notification content">
+            {% block article %}
+            
+            {% endblock %}
+        </div>
+    </div>
+    <div class="column is-one-quarter">
+        <div class="notification is-dark">
+            {% block article_side %}
+            
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'post-base.html' %}
+
+{% block hero %}
+<p class="title">
+    {{article.title}}
+</p>
+<p class="subtitle">
+    {{article.author}}
+</p>
+<p>
+    {{date_posted}}
+</p>
+<p>
+    {{date_updated}}
+</p>
+{% endblock %}
+
+{% block article %}
+{{article.content}}
+<p>
+    {{article.tags}}
+</p>
+<p>
+    {{article.category}}
+</p>
+{% endblock %}

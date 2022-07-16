@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        {% block head %}
+                            
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="{{ url_for('public.index') }}">
+                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+              </a>
+          
+                <a class="navbar-item is-hidden-desktop" href="https://github.com/RuinSain" target="_blank">
+                    <span class="icon" style="color: #333;">
+                    <i class="fa fa-github"></i>
+                    </span>
+                </a>
+                <div class="navbar-burger burger" onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+          
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item" href="{{ url_for('public.index') }}">
+                    Home
+                </a>
+                
+                <a class="navbar-item" href="{{ url_for('public.about') }}">
+                    About
+                </a>
+    
+                <a class="navbar-item" href="{{ url_for('public.articles') }}">
+                    Articles
+                </a>
+                
+                <div class="navbar-item">
+                    <form method="POST" action="{{ url_for('public.search') }}" class="field has-addons">
+                        {{ form.hidden_tag() }}
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Find an artcile..." name="searched">
+                        </div>
+                        <div class="control">
+                            <input class="button is-dark" type="submit" value="Search">
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+        </nav>
+        
+        <section class="hero is-medium is-dark content">
+            <div class="hero-body">
+                {% block hero %}
+                            
+                {% endblock %}
+            </div>
+          </section>
+
+        <section class="section">
+            <div class="container">
+                {% block content %}
+                            
+                {% endblock %}
+            </div>
+        </section>
+
+        <footer class="footer is-primary">
+            <div class="content has-text-centered">
+                <p>
+                    Copyright 
+                    <span class="icon-text">
+                        <span class="icon">
+                            <i class="fas fa-copyright"></i>
+                        </span>
+                        <span>{{ config['SITE_NAME'] }}</span>
+                    </span>
+                </p>
+            </div>
+          </footer>
+    </body>
+</html>
