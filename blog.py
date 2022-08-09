@@ -23,5 +23,5 @@ def identity(payload):
 jwt = JWT(app, authenticate, identity)
 
 if __name__ == '__main__':
-    # addUser("test1", "test2", "testauthor", "test@test.com", "Editor", 0)
+    # addUser("test2", "test2", "testauthor2", "test@test.com", "Editor", 0)
     app.run(port=8000)
